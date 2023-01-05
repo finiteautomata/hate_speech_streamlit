@@ -6,10 +6,6 @@ import streamlit as st
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-# Create an input box for context
-context = st.text_input("Context", "China prohíbe la cría de perros para consumo humano")
-# Create an input box for text
-text = st.text_input("Text", "")
 model_name = "piubamas/beto-contextualized-hate-speech"
 # Load tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -32,6 +28,16 @@ def predict(*args):
     chars = list(zip(id2label, list(output.logits[0].detach().cpu().numpy() > 0)))
 
     return [char for char, pred in chars if pred]
+
+
+
+# Create a title
+st.title("Detección de discurso de odio en medios")
+
+# Create an input box for context
+context = st.text_input("Contexto", "China prohíbe la cría de perros para consumo humano")
+# Create an input box for text
+text = st.text_input("Comentario", "Chinos hdrmp hay que matarlos a todos")
 
 # Create a button to classify
 if st.button("Classify"):
