@@ -4,6 +4,7 @@ Streamlit for classification using transformers
 # Import streamlit
 import streamlit as st
 import torch
+from pysentimiento.preprocessing import preprocess_tweet
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 model_name = "piubamas/beto-contextualized-hate-speech"
@@ -15,6 +16,7 @@ model = AutoModelForSequenceClassification.from_pretrained(model_name)
 id2label = [model.config.id2label[k] for k in range(len(model.config.id2label))]
 
 def predict(*args):
+    args = [preprocess_tweet(arg) for arg in args]
     encoding = tokenizer.encode_plus(*args)
 
     inputs = {
