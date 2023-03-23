@@ -42,7 +42,7 @@ context = st.text_input("Contexto", "China prohíbe la cría de perros para cons
 text = st.text_input("Comentario", "Chinos hdrmp hay que matarlos a todos")
 
 # Create a button to classify
-if st.button("Classify"):
+if st.button("Predict"):
     # Classify the text
     prediction = predict(text, context)
     # Print the classification
